@@ -1,4 +1,6 @@
 vim
 ===
 
-vim config
+My vim config
+
+Just symlink .vimrc from your home directory
