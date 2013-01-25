@@ -56,3 +56,6 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
+" start ctrip with ctrl+t
+let g:ctrlp_map = '<c-t>'
+let g:ctrlp_cmd = 'CtrlP'
