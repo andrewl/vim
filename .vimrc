@@ -25,6 +25,10 @@ endif
 
 syntax on
 
+" With a map leader it's possible to do extra key combinations
+" like <leader>w saves the current file
+let mapleader = ","
+let g:mapleader = ","
 
 "Display and Format the status line
 set laststatus=2
@@ -32,7 +36,10 @@ set statusline=%t%m%=%c,%l/%L
 
 let Tlist_Ctags_Cmd = "/usr/bin/ctags"
 let Tlist_WinWidth = 50
-map <F5>> :TlistToggle<cr>
+nmap <leader>f :TlistToggle<cr>
+
+" ctags file  - @todo make this a project basis file
+set tags=/srv/eurostar/htdocs/profiles/eurostar/modules/custom/tags
 
 " Makes search act like search in modern browsers
 set incsearch
@@ -41,11 +48,6 @@ set incsearch
 set showmatch
 " How many tenths of a second to blink when matching brackets
 set mat=2
-
-" With a map leader it's possible to do extra key combinations
-" like <leader>w saves the current file
-let mapleader = ","
-let g:mapleader = ","
 
 " Fast saving
 nmap <leader>w :w!<cr>
@@ -57,5 +59,11 @@ map <C-h> <C-W>h
 map <C-l> <C-W>l
 
 " start ctrip with ctrl+t
-let g:ctrlp_map = '<c-t>'
+let g:ctrlp_map = '<leader>t'
 let g:ctrlp_cmd = 'CtrlP'
+
+" php documentor settings
+let g:pdv_cfg_Author = "Andrew Larcombe <andrew@andrewl.net>"
+let g:pdv_cfg_Copyright = ""
+let g:pdv_cfg_License = ""
+nmap <leader>d :exe PhpDoc()<cr>
