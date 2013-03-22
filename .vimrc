@@ -23,6 +23,7 @@ if has("autocmd")
   augroup END
 endif
 
+" yes, we like syntax highlighting
 syntax on
 
 " With a map leader it's possible to do extra key combinations
@@ -32,7 +33,7 @@ let g:mapleader = ","
 
 "Display and Format the status line
 set laststatus=2
-set statusline=%t%m%=%c,%l/%L
+set statusline=%{fugitive#statusline()}%t%m%=%c,%l/%L
 
 let Tlist_Ctags_Cmd = "~/bin/ctags"
 let Tlist_WinWidth = 50
@@ -49,6 +50,11 @@ set mat=2
 
 " Fast saving
 nmap <leader>w :w!<cr>
+
+" Git shortcuts
+nmap <leader>gd :Gdiff<cr>
+nmap <leader>gb :Gblame<cr>
+nmap <leader>gc :Gcommit<cr>
 
 " Smart way to move between windows
 map <C-j> <C-W>j
@@ -99,4 +105,4 @@ au FileType php let g:syntastic_php_checkers=['php']
 "@todo - why does this not work?
 "au FileType drupal let g:syntastic_phpcs_args="--report=csv --standard=Drupal"
 
-set rtp+=/usr/local/lib/python2.7/site-packages/powerline/bindings/vim/
+"set rtp+=/usr/local/lib/python2.7/site-packages/powerline/bindings/vim/
