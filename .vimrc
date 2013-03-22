@@ -14,7 +14,7 @@ filetype on
 if has("autocmd")
 "  Drupal *.module and *.install files.
   augroup module
-    autocmd BufRead,BufNewFile *.module set filetype=drupal.php.php
+    autocmd BufRead,BufNewFile *.module set filetype=drupal.php
     autocmd BufRead,BufNewFile *.profile set filetype=drupal.php
     autocmd BufRead,BufNewFile *.theme set filetype=drupal.php
     autocmd BufRead,BufNewFile *.install set filetype=drupal.php
@@ -34,12 +34,10 @@ let g:mapleader = ","
 set laststatus=2
 set statusline=%t%m%=%c,%l/%L
 
-let Tlist_Ctags_Cmd = "/usr/bin/ctags"
+let Tlist_Ctags_Cmd = "~/bin/ctags"
 let Tlist_WinWidth = 50
 nmap <leader>f :TlistToggle<cr>
 
-" ctags file  - @todo make this a project basis file
-set tags=/srv/eurostar/htdocs/profiles/eurostar/modules/custom/tags
 
 " Makes search act like search in modern browsers
 set incsearch
@@ -85,3 +83,20 @@ nnoremap <C-n> :call NumberToggle()<cr>
 
 autocmd InsertEnter * :set number
 autocmd InsertLeave * :set relativenumber
+set relativenumber
+
+" project specific lvimrc files
+let g:localvimrc_sandbox = 0
+let g:localvimrc_count = 1
+let g:localvimrc_ask = 0
+
+" how to indent xml files
+au FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
+
+au FileType drupal let g:syntastic_php_checkers=['php']
+au FileType php let g:syntastic_php_checkers=['php']
+
+"@todo - why does this not work?
+"au FileType drupal let g:syntastic_phpcs_args="--report=csv --standard=Drupal"
+
+set rtp+=/usr/local/lib/python2.7/site-packages/powerline/bindings/vim/
