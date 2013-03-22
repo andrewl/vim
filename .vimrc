@@ -41,7 +41,11 @@ nmap <leader>f :TlistToggle<cr>
 
 
 " Makes search act like search in modern browsers
-set incsearch
+:set incsearch
+:set ignorecase
+:set smartcase
+:set hlsearch
+:nmap \q :nohlsearch<CR>
 
 " Show matching brackets when text indicator is over them
 set showmatch
