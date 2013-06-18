@@ -20,8 +20,12 @@ if has("autocmd")
     autocmd BufRead,BufNewFile *.install set filetype=drupal.php
     autocmd BufRead,BufNewFile *.inc set filetype=drupal.php
     autocmd BufRead,BufNewFile *.view set filetype=drupal.php
+    autocmd BufRead,BufNewFile *.test set filetype=drupal.php
   augroup END
 endif
+
+"cucumber files
+let feature_filetype='behat'
 
 " yes, we like syntax highlighting
 syntax on
@@ -37,8 +41,10 @@ set statusline=%{fugitive#statusline()}%t%m%=%c,%l/%L
 
 let Tlist_Ctags_Cmd = "~/bin/ctags"
 let Tlist_WinWidth = 50
-nmap <leader>f :TlistToggle<cr>
 
+"create new php ctags and cscope file with <leader>ta
+"nmap <leader>ta execute ':!~/.vim/helpers/php_scope_and_tags.sh ' . g:project_root
+set cscopeverbose  
 
 " Makes search act like search in modern browsers
 :set incsearch
@@ -50,7 +56,7 @@ nmap <leader>f :TlistToggle<cr>
 " Show matching brackets when text indicator is over them
 set showmatch
 " How many tenths of a second to blink when matching brackets
-set mat=2
+set mat=3
 
 " Fast saving
 nmap <leader>w :w!<cr>
@@ -66,9 +72,12 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
-" start ctrip with ctrl+t
+" start ctrlp with ctrl+t
 let g:ctrlp_map = '<leader>t'
 let g:ctrlp_cmd = 'CtrlP'
+map <leader>f :CtrlPTag<CR>
+map <leader>] :cs find c <C-R>=expand("<cword>")<CR><CR>  
+
 
 " php documentor settings
 let g:pdv_cfg_Author = "Andrew Larcombe <andrew@andrewl.net>"
@@ -108,5 +117,3 @@ au FileType php let g:syntastic_php_checkers=['php']
 
 "@todo - why does this not work?
 "au FileType drupal let g:syntastic_phpcs_args="--report=csv --standard=Drupal"
-
-"set rtp+=/usr/local/lib/python2.7/site-packages/powerline/bindings/vim/
