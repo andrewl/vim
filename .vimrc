@@ -1,4 +1,4 @@
-call pathogen#infect()
+cal pathogen#infect()
 
 set expandtab
 set tabstop=2
@@ -9,6 +9,7 @@ set t_Co=256
 set background=dark
 colors solarized
 
+filetype plugin on
 filetype on
 
 if has("autocmd")
@@ -39,11 +40,14 @@ let g:mapleader = ","
 set laststatus=2
 set statusline=%{fugitive#statusline()}%t%m%=%c,%l/%L
 
+
 let Tlist_Ctags_Cmd = "~/bin/ctags"
 let Tlist_WinWidth = 50
 
+set tags=tags;
+
 "create new php ctags and cscope file with <leader>ta
-"nmap <leader>ta execute ':!~/.vim/helpers/php_scope_and_tags.sh ' . g:project_root
+nmap <leader>u execute ':!~/.vim/helpers/php_scope_and_tags.sh ' . g:project_root
 set cscopeverbose  
 
 " Makes search act like search in modern browsers
@@ -57,6 +61,10 @@ set cscopeverbose
 set showmatch
 " How many tenths of a second to blink when matching brackets
 set mat=3
+
+" Omni completion
+set omnifunc=syntaxcomplete#Complete
+
 
 " Fast saving
 nmap <leader>w :w!<cr>
@@ -112,8 +120,11 @@ let g:localvimrc_ask = 0
 " how to indent xml files
 au FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
 
-au FileType drupal let g:syntastic_php_checkers=['php']
-au FileType php let g:syntastic_php_checkers=['php']
+"let g:syntastic_php_checkers=['php', 'phpcs']
+"let g:syntastic_drupal_checkers=['php', 'phpcs']
+let g:syntastic_phpmd_disable = 0
+let g:syntastic_phpmd_rules = "design,codesize"
 
-"@todo - why does this not work?
-"au FileType drupal let g:syntastic_phpcs_args="--report=csv --standard=Drupal"
+let g:syntastic_filetype_map = { 'drupal': 'php' }
+let g:syntastic_quiet_warnings = 1
+let g:syntastic_phpcs_conf=" --standard=Drupal --extensions=php,module,inc,install,test,profile,theme"
