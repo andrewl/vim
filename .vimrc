@@ -47,7 +47,7 @@ let Tlist_WinWidth = 50
 set tags=tags;
 
 "create new php ctags and cscope file with <leader>ta
-nmap <leader>u execute ':!~/.vim/helpers/php_scope_and_tags.sh ' . g:project_root
+nmap <leader>nt execute ':!~/.vim/helpers/php_scope_and_tags.sh ' . g:project_root
 set cscopeverbose  
 
 " Makes search act like search in modern browsers
@@ -112,15 +112,9 @@ autocmd InsertEnter * :set number
 autocmd InsertLeave * :set relativenumber
 set relativenumber
 
-" project specific lvimrc files
-let g:localvimrc_sandbox = 0
-let g:localvimrc_count = 1
-let g:localvimrc_ask = 0
-
 " how to indent xml files
 au FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
 
-"let g:syntastic_php_checkers=['php', 'phpcs']
 "let g:syntastic_drupal_checkers=['php', 'phpcs']
 let g:syntastic_phpmd_disable = 0
 let g:syntastic_phpmd_rules = "design,codesize"
@@ -128,3 +122,8 @@ let g:syntastic_phpmd_rules = "design,codesize"
 let g:syntastic_filetype_map = { 'drupal': 'php' }
 let g:syntastic_quiet_warnings = 1
 let g:syntastic_phpcs_conf=" --standard=Drupal --extensions=php,module,inc,install,test,profile,theme"
+
+" project specific lvimrc files
+let g:localvimrc_sandbox = 0
+let g:localvimrc_count = 1
+let g:localvimrc_ask = 0
