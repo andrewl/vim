@@ -1,4 +1,4 @@
-cal pathogen#infect()
+call pathogen#infect()
 
 set expandtab
 set tabstop=2
@@ -62,10 +62,6 @@ set showmatch
 " How many tenths of a second to blink when matching brackets
 set mat=3
 
-" Omni completion
-set omnifunc=syntaxcomplete#Complete
-
-
 " Fast saving
 nmap <leader>w :w!<cr>
 
@@ -113,7 +109,6 @@ autocmd InsertLeave * :set relativenumber
 set relativenumber
 
 " how to indent xml files
-au FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
 
 "let g:syntastic_drupal_checkers=['php', 'phpcs']
 let g:syntastic_phpmd_disable = 0
@@ -127,3 +122,40 @@ let g:syntastic_phpcs_conf=" --standard=Drupal --extensions=php,module,inc,insta
 let g:localvimrc_sandbox = 0
 let g:localvimrc_count = 1
 let g:localvimrc_ask = 0
+
+
+let g:acp_enableAtStartup = 0
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+
+let g:neocomplete#sources#dictionary#dictionaries = {
+  \ 'default' : '',
+  \ 'vimshell' : $HOME.'/.vimshell_hist',
+  \ 'scheme' : $HOME.'/.gosh_completions'
+    \ }
+
+if !exists('g:neocomplete#keyword_patterns')
+  let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+
+let g:neocomplete#enable_auto_select = 1
+
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
+autocmd FileType php setlocal omnifunc=phpcomplete_extended#CompletePHP
+autocmd FileType drupal.php setlocal omnifunc=phpcomplete_extended#CompletePHP
+autocmd FileType drupal setlocal omnifunc=phpcomplete_extended#CompletePHP
+

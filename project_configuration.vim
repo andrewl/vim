@@ -9,5 +9,4 @@ if !exists("project_configuration")
   endif
 
   nmap <leader>T :!~/.vim/helpers/php_scope_and_tags.sh g:project_root
-
 endif
