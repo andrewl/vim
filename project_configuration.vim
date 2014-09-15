@@ -8,5 +8,5 @@ if !exists("project_configuration")
     autocmd BufWritePre g:project_root . "/*" :%s/\s\+$//e
   endif
 
-  nmap <leader>T :!~/.vim/helpers/php_scope_and_tags.sh g:project_root
+  nmap <leader>T :! ~/.vim/helpers/php_scope_and_tags.sh g:project_root
 endif

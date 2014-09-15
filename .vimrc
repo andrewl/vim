@@ -15,13 +15,13 @@ filetype on
 if has("autocmd")
 "  Drupal *.module and *.install files.
   augroup module
-    autocmd BufRead,BufNewFile *.module set filetype=drupal.php
-    autocmd BufRead,BufNewFile *.profile set filetype=drupal.php
-    autocmd BufRead,BufNewFile *.theme set filetype=drupal.php
-    autocmd BufRead,BufNewFile *.install set filetype=drupal.php
-    autocmd BufRead,BufNewFile *.inc set filetype=drupal.php
-    autocmd BufRead,BufNewFile *.view set filetype=drupal.php
-    autocmd BufRead,BufNewFile *.test set filetype=drupal.php
+    autocmd BufRead,BufNewFile *.module set filetype=php.drupal
+    autocmd BufRead,BufNewFile *.profile set filetype=php.drupal
+    autocmd BufRead,BufNewFile *.theme set filetype=php.drupal
+    autocmd BufRead,BufNewFile *.install set filetype=php.drupal
+    autocmd BufRead,BufNewFile *.inc set filetype=php.drupal
+    autocmd BufRead,BufNewFile *.view set filetype=php.drupal
+    autocmd BufRead,BufNewFile *.test set filetype=php.drupal
   augroup END
 endif
 
@@ -40,15 +40,8 @@ let g:mapleader = ","
 set laststatus=2
 set statusline=%{fugitive#statusline()}%t%m%=%c,%l/%L
 
-
 let Tlist_Ctags_Cmd = "~/bin/ctags"
 let Tlist_WinWidth = 50
-
-set tags=tags;
-
-"create new php ctags and cscope file with <leader>ta
-nmap <leader>nt execute ':!~/.vim/helpers/php_scope_and_tags.sh ' . g:project_root
-set cscopeverbose  
 
 " Makes search act like search in modern browsers
 :set incsearch
@@ -79,15 +72,19 @@ map <C-l> <C-W>l
 " start ctrlp with ctrl+t
 let g:ctrlp_map = '<leader>t'
 let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_follow_symlinks = 1
 map <leader>f :CtrlPTag<CR>
 map <leader>] :cs find c <C-R>=expand("<cword>")<CR><CR>  
 
+" initiate dash on <leader>d
+:nmap <silent> <leader>d <Plug>DashSearch
 
 " php documentor settings
 let g:pdv_cfg_Author = "Andrew Larcombe <andrew@andrewl.net>"
 let g:pdv_cfg_Copyright = ""
 let g:pdv_cfg_License = ""
-nmap <leader>d :exe PhpDoc()<cr>
+nmap <leader>D :exe PhpDoc()<cr>
+
 
 
 " show relative numbers on navigation
@@ -108,21 +105,14 @@ autocmd InsertEnter * :set number
 autocmd InsertLeave * :set relativenumber
 set relativenumber
 
-" how to indent xml files
 
-"let g:syntastic_drupal_checkers=['php', 'phpcs']
-let g:syntastic_phpmd_disable = 0
-let g:syntastic_phpmd_rules = "design,codesize"
-
-let g:syntastic_filetype_map = { 'drupal': 'php' }
-let g:syntastic_quiet_warnings = 1
-let g:syntastic_phpcs_conf=" --standard=Drupal --extensions=php,module,inc,install,test,profile,theme"
+let g:syntastic_php_checkers=['php', 'phpcs']
+let g:syntastic_php_phpcs_conf="--standard=DrupalPractice --extensions=php,inc,module,install,theme,profile"
 
 " project specific lvimrc files
 let g:localvimrc_sandbox = 0
 let g:localvimrc_count = 1
 let g:localvimrc_ask = 0
-
 
 let g:acp_enableAtStartup = 0
 let g:neocomplete#enable_at_startup = 1
@@ -144,7 +134,7 @@ let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 inoremap <expr><C-g>     neocomplete#undo_completion()
 inoremap <expr><C-l>     neocomplete#complete_common_string()
 
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 
 let g:neocomplete#enable_auto_select = 1
@@ -156,6 +146,5 @@ autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
 autocmd FileType php setlocal omnifunc=phpcomplete_extended#CompletePHP
-autocmd FileType drupal.php setlocal omnifunc=phpcomplete_extended#CompletePHP
-autocmd FileType drupal setlocal omnifunc=phpcomplete_extended#CompletePHP
+autocmd FileType php.drupal setlocal omnifunc=phpcomplete_extended#CompletePHP
 
