@@ -39,9 +39,10 @@ let g:mapleader = ","
 "Display and Format the status line
 set laststatus=2
 set statusline=%{fugitive#statusline()}%t%m%=%c,%l/%L
+let g:ctags_statusline=1 
 
-let Tlist_Ctags_Cmd = "~/bin/ctags"
-let Tlist_WinWidth = 50
+" let Tlist_Ctags_Cmd = "~/bin/ctags"
+" let Tlist_WinWidth = 50
 
 " Makes search act like search in modern browsers
 :set incsearch
@@ -85,7 +86,7 @@ let g:pdv_cfg_Copyright = ""
 let g:pdv_cfg_License = ""
 nmap <leader>D :exe PhpDoc()<cr>
 
-
+nmap <leader>q :TagbarToggle<CR>
 
 " show relative numbers on navigation
 function! NumberToggle()
@@ -134,9 +135,6 @@ let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 inoremap <expr><C-g>     neocomplete#undo_completion()
 inoremap <expr><C-l>     neocomplete#complete_common_string()
 
-" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-
-
 let g:neocomplete#enable_auto_select = 1
 
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -147,4 +145,3 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
 autocmd FileType php setlocal omnifunc=phpcomplete_extended#CompletePHP
 autocmd FileType php.drupal setlocal omnifunc=phpcomplete_extended#CompletePHP
-
